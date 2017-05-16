@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MAS.BLL
 {
-    public class UserInfoService : BaseService<UserInfo>,IUserInfoService
+    public class UserInfoService : BaseService<MAS_Users>,IUserInfoService
     {
         public override void SetCurrentDal()
         {

@@ -18,7 +18,7 @@ namespace MAS.WebApp.Controllers
         #region 完成用户登录
         public ActionResult AdminLogin(string LoginCode, string LoginPwd)
         {
-            var userInfo = UserInfoService.LoadEnetities(u => u.user_name == LoginCode && u.user_pwd== LoginPwd).FirstOrDefault();
+            var userInfo = UserInfoService.LoadEnetities(u => u.UserName == LoginCode && u.UserPws== LoginPwd).FirstOrDefault();
             if (userInfo!=null)
             {
                 return Content("ok");

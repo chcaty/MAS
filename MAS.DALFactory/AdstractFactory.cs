@@ -17,12 +17,6 @@ namespace MAS.DALFactory
         private static readonly string AssemblyPath = ConfigurationManager.AppSettings["AssemblyPath"];
         private static readonly string NameSpace = ConfigurationManager.AppSettings["NameSpace"];
 
-        public static ICagegoryInfoDal CreateCategoryInfoDal()
-        {
-            string fullClassName = NameSpace + ".CategoryInfoDal";
-            return CreateInstance(fullClassName) as ICagegoryInfoDal;
-        }
-
         public static IUserInfoDal CreateUserInfoDal()
         {
             string fullClassName = NameSpace + ".UserInfoDal";

@@ -1,4 +1,4 @@
-﻿using Caty.OA.WebApp.Models;
+﻿using MAS.WebApp.Models;
 using log4net;
 using Spring.Web.Mvc;
 using System;
@@ -11,7 +11,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Caty.OA.WebApp
+namespace MAS.WebApp
 {
     public class MvcApplication : SpringMvcApplication //System.Web.HttpApplication
     {

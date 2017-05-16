@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MAS.IBLL
 {
-    public interface IUserInfoService:IBaseService<UserInfo>
+    public interface IUserInfoService:IBaseService<MAS_Users>
     {
 
     }

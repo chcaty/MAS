@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MAS.DAL
 {
-    public class UserInfoDal:BaseDal<UserInfo>,IUserInfoDal
+    public class UserInfoDal:BaseDal<MAS_Users>,IUserInfoDal
     {
 
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MAS.IDAL
 {
-    public interface IUserInfoDal:IBaseDal<UserInfo>
+    public interface IUserInfoDal:IBaseDal<MAS_Users>
     {
 
     }

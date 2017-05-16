@@ -1,11 +1,11 @@
-﻿using Caty.OA.WebApp.Models;
+﻿using MAS.WebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Caty.OA.WebApp
+namespace MAS.WebApp
 {
     public class FilterConfig
     {

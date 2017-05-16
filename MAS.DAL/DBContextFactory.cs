@@ -19,7 +19,7 @@ namespace MAS.DAL
             DbContext dbContext = (DbContext)CallContext.GetData("dbContext");
             if (dbContext == null)
             {
-                dbContext = new HotelEntities();
+                dbContext = new MASEntities();
                 CallContext.SetData("dbContext", dbContext);
             }
             return dbContext;
