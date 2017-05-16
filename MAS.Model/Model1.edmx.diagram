@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c2b8867392d14a76a118a3b9830e1640" Name="Diagram1">
+        <EntityTypeShape EntityType="MASModel.MAS_Actions" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MASModel.MAS_AgeRules" Width="1.5" PointX="2.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MASModel.MAS_DateType" Width="1.5" PointX="4.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MASModel.MAS_Department" Width="1.5" PointX="6.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MASModel.MAS_ExaminePlace" Width="1.5" PointX="8.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MASModel.MAS_ExamineType" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MASModel.MAS_Kollisionsregel" Width="1.5" PointX="2.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MASModel.MAS_NumberTimes_Now" Width="1.5" PointX="7.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MASModel.MAS_NumberTimes_Queue" Width="1.5" PointX="9.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MASModel.MAS_NumberTimes_Scheme" Width="1.5" PointX="10.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MASModel.MAS_Patient" Width="1.5" PointX="5.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="MASModel.MAS_Request" Width="1.5" PointX="5.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MASModel.MAS_Reservations" Width="1.5" PointX="8" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MASModel.MAS_RoleActions" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MASModel.MAS_Roles" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MASModel.MAS_UserRoles" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MASModel.MAS_Users" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MASModel.MAS_CheckQueue" Width="1.5" PointX="10.75" PointY="7.125" IsExpanded="true" />
+        <AssociationConnector Association="MASModel.FK_MAS_RoleActions_MAS_Actions" ManuallyRouted="false" />
+        <AssociationConnector Association="MASModel.FK_MAS_Reservations_MAS_Patient" ManuallyRouted="false" />
+        <AssociationConnector Association="MASModel.FK_MAS_Reservations_MAS_Request" ManuallyRouted="false" />
+        <AssociationConnector Association="MASModel.FK_MAS_RoleActions_MAS_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="MASModel.FK_MAS_UserRoles_MAS_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="MASModel.FK_MAS_UserRoles_MAS_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,994 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MAS_Actions">
+          <Key>
+            <PropertyRef Name="ActionId" />
+          </Key>
+          <Property Name="ActionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActionName" Type="varchar" MaxLength="50" />
+          <Property Name="DelFlag" Type="tinyint" />
+          <Property Name="displayOrder" Type="int" />
+        </EntityType>
+        <EntityType Name="MAS_AgeRules">
+          <Key>
+            <PropertyRef Name="AgeRules_ID" />
+          </Key>
+          <Property Name="AgeRules_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Department_ID" Type="int" Nullable="false" />
+          <Property Name="Examine_ID" Type="int" Nullable="false" />
+          <Property Name="MinAge" Type="int" Nullable="false" />
+          <Property Name="MaxAge" Type="int" Nullable="false" />
+          <Property Name="AgeUnit" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“MAS.dbo.MAS_CheckQueue”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="MAS_CheckQueue">
+          <Key>
+            <PropertyRef Name="Department" />
+            <PropertyRef Name="Examine" />
+            <PropertyRef Name="Examine_Place" />
+            <PropertyRef Name="Examine_Period" />
+            <PropertyRef Name="Examine_Date" />
+            <PropertyRef Name="Patient_ID" />
+          </Key>
+          <Property Name="Department" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Examine" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Examine_Place" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Examine_Period" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Examine_Date" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Patient_ID" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MAS_DateType">
+          <Key>
+            <PropertyRef Name="DateType_ID" />
+          </Key>
+          <Property Name="DateType_ID" Type="int" Nullable="false" />
+          <Property Name="DateType_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MAS_Department">
+          <Key>
+            <PropertyRef Name="Department_ID" />
+          </Key>
+          <Property Name="Department_ID" Type="int" Nullable="false" />
+          <Property Name="Department_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MAS_ExaminePlace">
+          <Key>
+            <PropertyRef Name="Place_ID" />
+          </Key>
+          <Property Name="Place_ID" Type="int" Nullable="false" />
+          <Property Name="Place_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MAS_ExamineType">
+          <Key>
+            <PropertyRef Name="Examine_ID" />
+          </Key>
+          <Property Name="Examine_ID" Type="int" Nullable="false" />
+          <Property Name="Examine_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MAS_Kollisionsregel">
+          <Key>
+            <PropertyRef Name="Kollisionsregel_ID" />
+          </Key>
+          <Property Name="Kollisionsregel_ID" Type="int" Nullable="false" />
+          <Property Name="Department__ID_One" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Exanmine_ID_One" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Department_ID_Two" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Exanmine_ID_Two" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Kollisionsregel_Tyoe" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MAS_NumberTimes_Now">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Department_ID" Type="int" Nullable="false" />
+          <Property Name="Examine_ID" Type="int" Nullable="false" />
+          <Property Name="CheckNumber" Type="int" Nullable="false" />
+          <Property Name="Period" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Period_No" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MAS_NumberTimes_Queue">
+          <Key>
+            <PropertyRef Name="Queue_ID" />
+          </Key>
+          <Property Name="Department_ID" Type="int" Nullable="false" />
+          <Property Name="Examine_ID" Type="int" Nullable="false" />
+          <Property Name="CheckNumber" Type="int" Nullable="false" />
+          <Property Name="Period" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Period_No" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Queue_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MAS_NumberTimes_Scheme">
+          <Key>
+            <PropertyRef Name="Schemes_ID" />
+          </Key>
+          <Property Name="Schemes_ID" Type="int" Nullable="false" />
+          <Property Name="Department_ID" Type="int" Nullable="false" />
+          <Property Name="Eanmine_ID" Type="int" Nullable="false" />
+          <Property Name="Am_StartTime" Type="datetime" Nullable="false" />
+          <Property Name="Am_EndTime" Type="datetime" Nullable="false" />
+          <Property Name="Pm_StartTime" Type="datetime" Nullable="false" />
+          <Property Name="Pm_EndTime" Type="datetime" Nullable="false" />
+          <Property Name="Period" Type="int" Nullable="false" />
+          <Property Name="Mins" Type="int" Nullable="false" />
+          <Property Name="OfficeNumber" Type="int" Nullable="false" />
+          <Property Name="CheckNumber" Type="int" Nullable="false" />
+          <Property Name="EffectiveDate" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateType_ID" Type="int" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MAS_Patient">
+          <Key>
+            <PropertyRef Name="PatientId" />
+          </Key>
+          <Property Name="PatientId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientName" Type="nvarchar" MaxLength="30" />
+          <Property Name="PatientSex" Type="nvarchar" MaxLength="10" />
+          <Property Name="PatientAddress" Type="nvarchar" MaxLength="150" />
+          <Property Name="PatientBirthDate" Type="datetime" />
+          <Property Name="PatientTel" Type="nvarchar" MaxLength="30" />
+          <Property Name="PatientHISID" Type="nvarchar" MaxLength="50" />
+          <Property Name="PatientIDCard" Type="nvarchar" MaxLength="20" />
+          <Property Name="PatientAge" Type="nvarchar" MaxLength="20" />
+          <Property Name="CreateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MAS_Request">
+          <Key>
+            <PropertyRef Name="RequestId" />
+          </Key>
+          <Property Name="RequestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CheckSite" Type="nvarchar" MaxLength="255" />
+          <Property Name="BodyPartIdentity" Type="nvarchar" MaxLength="512" />
+          <Property Name="StudyHISID" Type="nvarchar" MaxLength="80" />
+          <Property Name="StudySource" Type="nvarchar" MaxLength="10" />
+          <Property Name="StudyDepartment" Type="nvarchar" MaxLength="20" />
+          <Property Name="StudyFee" Type="money" />
+          <Property Name="StudyScore" Type="money" />
+          <Property Name="AppliedDepartment" Type="nvarchar" MaxLength="40" />
+          <Property Name="AppliedDoctor" Type="nvarchar" MaxLength="20" />
+          <Property Name="AppledDatetime" Type="datetime" />
+          <Property Name="ClinicSymptom" Type="nvarchar" MaxLength="400" />
+          <Property Name="ClinicDiagnose" Type="nvarchar" MaxLength="400" />
+          <Property Name="ExamRequest" Type="nvarchar" MaxLength="200" />
+          <Property Name="BedNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="UniversalServiceID" Type="nvarchar" MaxLength="40" />
+          <Property Name="UniversalServiceText" Type="nvarchar" MaxLength="80" />
+          <Property Name="PatientClass" Type="nvarchar" MaxLength="10" />
+          <Property Name="ApplyBillClass" Type="nvarchar" MaxLength="10" />
+          <Property Name="HISCode" Type="nvarchar" MaxLength="512" />
+          <Property Name="RegistDate" Type="datetime" />
+          <Property Name="RegistOperator" Type="nvarchar" MaxLength="20" />
+          <Property Name="StudyPatientIn" Type="nvarchar" MaxLength="20" />
+          <Property Name="SickAreaName" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="MAS_Reservations">
+          <Key>
+            <PropertyRef Name="ReservationId" />
+          </Key>
+          <Property Name="ReservationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReservationData" Type="varchar" MaxLength="50" />
+          <Property Name="StudyKindName" Type="varchar" MaxLength="50" />
+          <Property Name="SystemType" Type="int" />
+          <Property Name="ReserveBeginTime" Type="datetime" />
+          <Property Name="ReserveEndTime" Type="datetime" />
+          <Property Name="ReserveState" Type="nchar" MaxLength="10" />
+          <Property Name="IsCharged" Type="int" />
+          <Property Name="ReserveOperator" Type="nchar" MaxLength="30" />
+          <Property Name="ReserveDepartment" Type="nchar" MaxLength="30" />
+          <Property Name="SaveTime" Type="datetime" />
+          <Property Name="StudyDepartmentPlace" Type="varchar" MaxLength="100" />
+          <Property Name="ScanType" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReserveDepartmentStudySource" Type="varchar" MaxLength="50" />
+          <Property Name="PatientId" Type="int" />
+          <Property Name="RequestId" Type="int" />
+        </EntityType>
+        <EntityType Name="MAS_RoleActions">
+          <Key>
+            <PropertyRef Name="RoleActionId" />
+          </Key>
+          <Property Name="RoleActionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleId" Type="int" />
+          <Property Name="ActionId" Type="int" />
+        </EntityType>
+        <EntityType Name="MAS_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="50" />
+          <Property Name="DelFlag" Type="int" />
+        </EntityType>
+        <EntityType Name="MAS_UserRoles">
+          <Key>
+            <PropertyRef Name="UserRoleId" />
+          </Key>
+          <Property Name="UserRoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="RoleId" Type="int" />
+        </EntityType>
+        <EntityType Name="MAS_Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="UserCode" Type="int" />
+          <Property Name="UserPws" Type="varchar" MaxLength="50" />
+          <Property Name="DelFlag" Type="int" />
+        </EntityType>
+        <Association Name="FK_MAS_Reservations_MAS_Patient">
+          <End Role="MAS_Patient" Type="Self.MAS_Patient" Multiplicity="0..1" />
+          <End Role="MAS_Reservations" Type="Self.MAS_Reservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MAS_Patient">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="MAS_Reservations">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAS_Reservations_MAS_Request">
+          <End Role="MAS_Request" Type="Self.MAS_Request" Multiplicity="0..1" />
+          <End Role="MAS_Reservations" Type="Self.MAS_Reservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MAS_Request">
+              <PropertyRef Name="RequestId" />
+            </Principal>
+            <Dependent Role="MAS_Reservations">
+              <PropertyRef Name="RequestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAS_RoleActions_MAS_Actions">
+          <End Role="MAS_Actions" Type="Self.MAS_Actions" Multiplicity="0..1" />
+          <End Role="MAS_RoleActions" Type="Self.MAS_RoleActions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MAS_Actions">
+              <PropertyRef Name="ActionId" />
+            </Principal>
+            <Dependent Role="MAS_RoleActions">
+              <PropertyRef Name="ActionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAS_RoleActions_MAS_Roles">
+          <End Role="MAS_Roles" Type="Self.MAS_Roles" Multiplicity="0..1" />
+          <End Role="MAS_RoleActions" Type="Self.MAS_RoleActions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MAS_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="MAS_RoleActions">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAS_UserRoles_MAS_Roles">
+          <End Role="MAS_Roles" Type="Self.MAS_Roles" Multiplicity="0..1" />
+          <End Role="MAS_UserRoles" Type="Self.MAS_UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MAS_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="MAS_UserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAS_UserRoles_MAS_Users">
+          <End Role="MAS_Users" Type="Self.MAS_Users" Multiplicity="0..1" />
+          <End Role="MAS_UserRoles" Type="Self.MAS_UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MAS_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="MAS_UserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MASModelStoreContainer">
+          <EntitySet Name="MAS_Actions" EntityType="Self.MAS_Actions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MAS_AgeRules" EntityType="Self.MAS_AgeRules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MAS_DateType" EntityType="Self.MAS_DateType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MAS_Department" EntityType="Self.MAS_Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MAS_ExaminePlace" EntityType="Self.MAS_ExaminePlace" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MAS_ExamineType" EntityType="Self.MAS_ExamineType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MAS_Kollisionsregel" EntityType="Self.MAS_Kollisionsregel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MAS_NumberTimes_Now" EntityType="Self.MAS_NumberTimes_Now" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MAS_NumberTimes_Queue" EntityType="Self.MAS_NumberTimes_Queue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MAS_NumberTimes_Scheme" EntityType="Self.MAS_NumberTimes_Scheme" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MAS_Patient" EntityType="Self.MAS_Patient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MAS_Request" EntityType="Self.MAS_Request" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MAS_Reservations" EntityType="Self.MAS_Reservations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MAS_RoleActions" EntityType="Self.MAS_RoleActions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MAS_Roles" EntityType="Self.MAS_Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MAS_UserRoles" EntityType="Self.MAS_UserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MAS_Users" EntityType="Self.MAS_Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MAS_CheckQueue" EntityType="Self.MAS_CheckQueue" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MAS_CheckQueue].[Department] AS [Department], 
+    [MAS_CheckQueue].[Examine] AS [Examine], 
+    [MAS_CheckQueue].[Examine_Place] AS [Examine_Place], 
+    [MAS_CheckQueue].[Examine_Period] AS [Examine_Period], 
+    [MAS_CheckQueue].[Examine_Date] AS [Examine_Date], 
+    [MAS_CheckQueue].[Patient_ID] AS [Patient_ID]
+    FROM [dbo].[MAS_CheckQueue] AS [MAS_CheckQueue]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_MAS_Reservations_MAS_Patient" Association="Self.FK_MAS_Reservations_MAS_Patient">
+            <End Role="MAS_Patient" EntitySet="MAS_Patient" />
+            <End Role="MAS_Reservations" EntitySet="MAS_Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAS_Reservations_MAS_Request" Association="Self.FK_MAS_Reservations_MAS_Request">
+            <End Role="MAS_Request" EntitySet="MAS_Request" />
+            <End Role="MAS_Reservations" EntitySet="MAS_Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAS_RoleActions_MAS_Actions" Association="Self.FK_MAS_RoleActions_MAS_Actions">
+            <End Role="MAS_Actions" EntitySet="MAS_Actions" />
+            <End Role="MAS_RoleActions" EntitySet="MAS_RoleActions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAS_RoleActions_MAS_Roles" Association="Self.FK_MAS_RoleActions_MAS_Roles">
+            <End Role="MAS_Roles" EntitySet="MAS_Roles" />
+            <End Role="MAS_RoleActions" EntitySet="MAS_RoleActions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAS_UserRoles_MAS_Roles" Association="Self.FK_MAS_UserRoles_MAS_Roles">
+            <End Role="MAS_Roles" EntitySet="MAS_Roles" />
+            <End Role="MAS_UserRoles" EntitySet="MAS_UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAS_UserRoles_MAS_Users" Association="Self.FK_MAS_UserRoles_MAS_Users">
+            <End Role="MAS_Users" EntitySet="MAS_Users" />
+            <End Role="MAS_UserRoles" EntitySet="MAS_UserRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MASModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="MAS_Actions">
+          <Key>
+            <PropertyRef Name="ActionId" />
+          </Key>
+          <Property Name="ActionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DelFlag" Type="Byte" />
+          <Property Name="displayOrder" Type="Int32" />
+          <NavigationProperty Name="MAS_RoleActions" Relationship="Self.FK_MAS_RoleActions_MAS_Actions" FromRole="MAS_Actions" ToRole="MAS_RoleActions" />
+        </EntityType>
+        <EntityType Name="MAS_AgeRules">
+          <Key>
+            <PropertyRef Name="AgeRules_ID" />
+          </Key>
+          <Property Name="AgeRules_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Department_ID" Type="Int32" Nullable="false" />
+          <Property Name="Examine_ID" Type="Int32" Nullable="false" />
+          <Property Name="MinAge" Type="Int32" Nullable="false" />
+          <Property Name="MaxAge" Type="Int32" Nullable="false" />
+          <Property Name="AgeUnit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MAS_DateType">
+          <Key>
+            <PropertyRef Name="DateType_ID" />
+          </Key>
+          <Property Name="DateType_ID" Type="Int32" Nullable="false" />
+          <Property Name="DateType_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MAS_Department">
+          <Key>
+            <PropertyRef Name="Department_ID" />
+          </Key>
+          <Property Name="Department_ID" Type="Int32" Nullable="false" />
+          <Property Name="Department_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MAS_ExaminePlace">
+          <Key>
+            <PropertyRef Name="Place_ID" />
+          </Key>
+          <Property Name="Place_ID" Type="Int32" Nullable="false" />
+          <Property Name="Place_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MAS_ExamineType">
+          <Key>
+            <PropertyRef Name="Examine_ID" />
+          </Key>
+          <Property Name="Examine_ID" Type="Int32" Nullable="false" />
+          <Property Name="Examine_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MAS_Kollisionsregel">
+          <Key>
+            <PropertyRef Name="Kollisionsregel_ID" />
+          </Key>
+          <Property Name="Kollisionsregel_ID" Type="Int32" Nullable="false" />
+          <Property Name="Department__ID_One" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Exanmine_ID_One" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Department_ID_Two" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Exanmine_ID_Two" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Kollisionsregel_Tyoe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MAS_NumberTimes_Now">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Department_ID" Type="Int32" Nullable="false" />
+          <Property Name="Examine_ID" Type="Int32" Nullable="false" />
+          <Property Name="CheckNumber" Type="Int32" Nullable="false" />
+          <Property Name="Period" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Period_No" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MAS_NumberTimes_Queue">
+          <Key>
+            <PropertyRef Name="Queue_ID" />
+          </Key>
+          <Property Name="Department_ID" Type="Int32" Nullable="false" />
+          <Property Name="Examine_ID" Type="Int32" Nullable="false" />
+          <Property Name="CheckNumber" Type="Int32" Nullable="false" />
+          <Property Name="Period" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Period_No" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Queue_ID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MAS_NumberTimes_Scheme">
+          <Key>
+            <PropertyRef Name="Schemes_ID" />
+          </Key>
+          <Property Name="Schemes_ID" Type="Int32" Nullable="false" />
+          <Property Name="Department_ID" Type="Int32" Nullable="false" />
+          <Property Name="Eanmine_ID" Type="Int32" Nullable="false" />
+          <Property Name="Am_StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Am_EndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Pm_StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Pm_EndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Period" Type="Int32" Nullable="false" />
+          <Property Name="Mins" Type="Int32" Nullable="false" />
+          <Property Name="OfficeNumber" Type="Int32" Nullable="false" />
+          <Property Name="CheckNumber" Type="Int32" Nullable="false" />
+          <Property Name="EffectiveDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateType_ID" Type="Int32" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MAS_Patient">
+          <Key>
+            <PropertyRef Name="PatientId" />
+          </Key>
+          <Property Name="PatientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="PatientSex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PatientAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="PatientBirthDate" Type="DateTime" Precision="3" />
+          <Property Name="PatientTel" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="PatientHISID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PatientIDCard" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PatientAge" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MAS_Reservations" Relationship="Self.FK_MAS_Reservations_MAS_Patient" FromRole="MAS_Patient" ToRole="MAS_Reservations" />
+        </EntityType>
+        <EntityType Name="MAS_Request">
+          <Key>
+            <PropertyRef Name="RequestId" />
+          </Key>
+          <Property Name="RequestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CheckSite" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BodyPartIdentity" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="StudyHISID" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="StudySource" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="StudyDepartment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="StudyFee" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="StudyScore" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="AppliedDepartment" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="AppliedDoctor" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="AppledDatetime" Type="DateTime" Precision="3" />
+          <Property Name="ClinicSymptom" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="ClinicDiagnose" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="ExamRequest" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BedNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UniversalServiceID" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="UniversalServiceText" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="PatientClass" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ApplyBillClass" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="HISCode" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="RegistDate" Type="DateTime" Precision="3" />
+          <Property Name="RegistOperator" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="StudyPatientIn" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SickAreaName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MAS_Reservations" Relationship="Self.FK_MAS_Reservations_MAS_Request" FromRole="MAS_Request" ToRole="MAS_Reservations" />
+        </EntityType>
+        <EntityType Name="MAS_Reservations">
+          <Key>
+            <PropertyRef Name="ReservationId" />
+          </Key>
+          <Property Name="ReservationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReservationData" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StudyKindName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SystemType" Type="Int32" />
+          <Property Name="ReserveBeginTime" Type="DateTime" Precision="3" />
+          <Property Name="ReserveEndTime" Type="DateTime" Precision="3" />
+          <Property Name="ReserveState" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="IsCharged" Type="Int32" />
+          <Property Name="ReserveOperator" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="ReserveDepartment" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="SaveTime" Type="DateTime" Precision="3" />
+          <Property Name="StudyDepartmentPlace" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ScanType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReserveDepartmentStudySource" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PatientId" Type="Int32" />
+          <Property Name="RequestId" Type="Int32" />
+          <NavigationProperty Name="MAS_Patient" Relationship="Self.FK_MAS_Reservations_MAS_Patient" FromRole="MAS_Reservations" ToRole="MAS_Patient" />
+          <NavigationProperty Name="MAS_Request" Relationship="Self.FK_MAS_Reservations_MAS_Request" FromRole="MAS_Reservations" ToRole="MAS_Request" />
+        </EntityType>
+        <EntityType Name="MAS_RoleActions">
+          <Key>
+            <PropertyRef Name="RoleActionId" />
+          </Key>
+          <Property Name="RoleActionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="Int32" />
+          <Property Name="ActionId" Type="Int32" />
+          <NavigationProperty Name="MAS_Actions" Relationship="Self.FK_MAS_RoleActions_MAS_Actions" FromRole="MAS_RoleActions" ToRole="MAS_Actions" />
+          <NavigationProperty Name="MAS_Roles" Relationship="Self.FK_MAS_RoleActions_MAS_Roles" FromRole="MAS_RoleActions" ToRole="MAS_Roles" />
+        </EntityType>
+        <EntityType Name="MAS_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DelFlag" Type="Int32" />
+          <NavigationProperty Name="MAS_RoleActions" Relationship="Self.FK_MAS_RoleActions_MAS_Roles" FromRole="MAS_Roles" ToRole="MAS_RoleActions" />
+          <NavigationProperty Name="MAS_UserRoles" Relationship="Self.FK_MAS_UserRoles_MAS_Roles" FromRole="MAS_Roles" ToRole="MAS_UserRoles" />
+        </EntityType>
+        <EntityType Name="MAS_UserRoles">
+          <Key>
+            <PropertyRef Name="UserRoleId" />
+          </Key>
+          <Property Name="UserRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="RoleId" Type="Int32" />
+          <NavigationProperty Name="MAS_Roles" Relationship="Self.FK_MAS_UserRoles_MAS_Roles" FromRole="MAS_UserRoles" ToRole="MAS_Roles" />
+          <NavigationProperty Name="MAS_Users" Relationship="Self.FK_MAS_UserRoles_MAS_Users" FromRole="MAS_UserRoles" ToRole="MAS_Users" />
+        </EntityType>
+        <EntityType Name="MAS_Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserCode" Type="Int32" />
+          <Property Name="UserPws" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DelFlag" Type="Int32" />
+          <NavigationProperty Name="MAS_UserRoles" Relationship="Self.FK_MAS_UserRoles_MAS_Users" FromRole="MAS_Users" ToRole="MAS_UserRoles" />
+        </EntityType>
+        <EntityType Name="MAS_CheckQueue">
+          <Key>
+            <PropertyRef Name="Department" />
+            <PropertyRef Name="Examine" />
+            <PropertyRef Name="Examine_Place" />
+            <PropertyRef Name="Examine_Period" />
+            <PropertyRef Name="Examine_Date" />
+            <PropertyRef Name="Patient_ID" />
+          </Key>
+          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Examine" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Examine_Place" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Examine_Period" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Examine_Date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Patient_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_MAS_RoleActions_MAS_Actions">
+          <End Role="MAS_Actions" Type="Self.MAS_Actions" Multiplicity="0..1" />
+          <End Role="MAS_RoleActions" Type="Self.MAS_RoleActions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MAS_Actions">
+              <PropertyRef Name="ActionId" />
+            </Principal>
+            <Dependent Role="MAS_RoleActions">
+              <PropertyRef Name="ActionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAS_Reservations_MAS_Patient">
+          <End Role="MAS_Patient" Type="Self.MAS_Patient" Multiplicity="0..1" />
+          <End Role="MAS_Reservations" Type="Self.MAS_Reservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MAS_Patient">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="MAS_Reservations">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAS_Reservations_MAS_Request">
+          <End Role="MAS_Request" Type="Self.MAS_Request" Multiplicity="0..1" />
+          <End Role="MAS_Reservations" Type="Self.MAS_Reservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MAS_Request">
+              <PropertyRef Name="RequestId" />
+            </Principal>
+            <Dependent Role="MAS_Reservations">
+              <PropertyRef Name="RequestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAS_RoleActions_MAS_Roles">
+          <End Role="MAS_Roles" Type="Self.MAS_Roles" Multiplicity="0..1" />
+          <End Role="MAS_RoleActions" Type="Self.MAS_RoleActions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MAS_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="MAS_RoleActions">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAS_UserRoles_MAS_Roles">
+          <End Role="MAS_Roles" Type="Self.MAS_Roles" Multiplicity="0..1" />
+          <End Role="MAS_UserRoles" Type="Self.MAS_UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MAS_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="MAS_UserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAS_UserRoles_MAS_Users">
+          <End Role="MAS_Users" Type="Self.MAS_Users" Multiplicity="0..1" />
+          <End Role="MAS_UserRoles" Type="Self.MAS_UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MAS_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="MAS_UserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MASEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MAS_Actions" EntityType="Self.MAS_Actions" />
+          <EntitySet Name="MAS_AgeRules" EntityType="Self.MAS_AgeRules" />
+          <EntitySet Name="MAS_DateType" EntityType="Self.MAS_DateType" />
+          <EntitySet Name="MAS_Department" EntityType="Self.MAS_Department" />
+          <EntitySet Name="MAS_ExaminePlace" EntityType="Self.MAS_ExaminePlace" />
+          <EntitySet Name="MAS_ExamineType" EntityType="Self.MAS_ExamineType" />
+          <EntitySet Name="MAS_Kollisionsregel" EntityType="Self.MAS_Kollisionsregel" />
+          <EntitySet Name="MAS_NumberTimes_Now" EntityType="Self.MAS_NumberTimes_Now" />
+          <EntitySet Name="MAS_NumberTimes_Queue" EntityType="Self.MAS_NumberTimes_Queue" />
+          <EntitySet Name="MAS_NumberTimes_Scheme" EntityType="Self.MAS_NumberTimes_Scheme" />
+          <EntitySet Name="MAS_Patient" EntityType="Self.MAS_Patient" />
+          <EntitySet Name="MAS_Request" EntityType="Self.MAS_Request" />
+          <EntitySet Name="MAS_Reservations" EntityType="Self.MAS_Reservations" />
+          <EntitySet Name="MAS_RoleActions" EntityType="Self.MAS_RoleActions" />
+          <EntitySet Name="MAS_Roles" EntityType="Self.MAS_Roles" />
+          <EntitySet Name="MAS_UserRoles" EntityType="Self.MAS_UserRoles" />
+          <EntitySet Name="MAS_Users" EntityType="Self.MAS_Users" />
+          <EntitySet Name="MAS_CheckQueue" EntityType="Self.MAS_CheckQueue" />
+          <AssociationSet Name="FK_MAS_RoleActions_MAS_Actions" Association="Self.FK_MAS_RoleActions_MAS_Actions">
+            <End Role="MAS_Actions" EntitySet="MAS_Actions" />
+            <End Role="MAS_RoleActions" EntitySet="MAS_RoleActions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAS_Reservations_MAS_Patient" Association="Self.FK_MAS_Reservations_MAS_Patient">
+            <End Role="MAS_Patient" EntitySet="MAS_Patient" />
+            <End Role="MAS_Reservations" EntitySet="MAS_Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAS_Reservations_MAS_Request" Association="Self.FK_MAS_Reservations_MAS_Request">
+            <End Role="MAS_Request" EntitySet="MAS_Request" />
+            <End Role="MAS_Reservations" EntitySet="MAS_Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAS_RoleActions_MAS_Roles" Association="Self.FK_MAS_RoleActions_MAS_Roles">
+            <End Role="MAS_Roles" EntitySet="MAS_Roles" />
+            <End Role="MAS_RoleActions" EntitySet="MAS_RoleActions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAS_UserRoles_MAS_Roles" Association="Self.FK_MAS_UserRoles_MAS_Roles">
+            <End Role="MAS_Roles" EntitySet="MAS_Roles" />
+            <End Role="MAS_UserRoles" EntitySet="MAS_UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAS_UserRoles_MAS_Users" Association="Self.FK_MAS_UserRoles_MAS_Users">
+            <End Role="MAS_Users" EntitySet="MAS_Users" />
+            <End Role="MAS_UserRoles" EntitySet="MAS_UserRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MASModelStoreContainer" CdmEntityContainer="MASEntities">
+          <EntitySetMapping Name="MAS_Actions">
+            <EntityTypeMapping TypeName="MASModel.MAS_Actions">
+              <MappingFragment StoreEntitySet="MAS_Actions">
+                <ScalarProperty Name="ActionId" ColumnName="ActionId" />
+                <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+                <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+                <ScalarProperty Name="displayOrder" ColumnName="displayOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MAS_AgeRules">
+            <EntityTypeMapping TypeName="MASModel.MAS_AgeRules">
+              <MappingFragment StoreEntitySet="MAS_AgeRules">
+                <ScalarProperty Name="AgeRules_ID" ColumnName="AgeRules_ID" />
+                <ScalarProperty Name="Department_ID" ColumnName="Department_ID" />
+                <ScalarProperty Name="Examine_ID" ColumnName="Examine_ID" />
+                <ScalarProperty Name="MinAge" ColumnName="MinAge" />
+                <ScalarProperty Name="MaxAge" ColumnName="MaxAge" />
+                <ScalarProperty Name="AgeUnit" ColumnName="AgeUnit" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MAS_DateType">
+            <EntityTypeMapping TypeName="MASModel.MAS_DateType">
+              <MappingFragment StoreEntitySet="MAS_DateType">
+                <ScalarProperty Name="DateType_ID" ColumnName="DateType_ID" />
+                <ScalarProperty Name="DateType_Name" ColumnName="DateType_Name" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MAS_Department">
+            <EntityTypeMapping TypeName="MASModel.MAS_Department">
+              <MappingFragment StoreEntitySet="MAS_Department">
+                <ScalarProperty Name="Department_ID" ColumnName="Department_ID" />
+                <ScalarProperty Name="Department_Name" ColumnName="Department_Name" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MAS_ExaminePlace">
+            <EntityTypeMapping TypeName="MASModel.MAS_ExaminePlace">
+              <MappingFragment StoreEntitySet="MAS_ExaminePlace">
+                <ScalarProperty Name="Place_ID" ColumnName="Place_ID" />
+                <ScalarProperty Name="Place_Name" ColumnName="Place_Name" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MAS_ExamineType">
+            <EntityTypeMapping TypeName="MASModel.MAS_ExamineType">
+              <MappingFragment StoreEntitySet="MAS_ExamineType">
+                <ScalarProperty Name="Examine_ID" ColumnName="Examine_ID" />
+                <ScalarProperty Name="Examine_Name" ColumnName="Examine_Name" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MAS_Kollisionsregel">
+            <EntityTypeMapping TypeName="MASModel.MAS_Kollisionsregel">
+              <MappingFragment StoreEntitySet="MAS_Kollisionsregel">
+                <ScalarProperty Name="Kollisionsregel_ID" ColumnName="Kollisionsregel_ID" />
+                <ScalarProperty Name="Department__ID_One" ColumnName="Department__ID_One" />
+                <ScalarProperty Name="Exanmine_ID_One" ColumnName="Exanmine_ID_One" />
+                <ScalarProperty Name="Department_ID_Two" ColumnName="Department_ID_Two" />
+                <ScalarProperty Name="Exanmine_ID_Two" ColumnName="Exanmine_ID_Two" />
+                <ScalarProperty Name="Kollisionsregel_Tyoe" ColumnName="Kollisionsregel_Tyoe" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MAS_NumberTimes_Now">
+            <EntityTypeMapping TypeName="MASModel.MAS_NumberTimes_Now">
+              <MappingFragment StoreEntitySet="MAS_NumberTimes_Now">
+                <ScalarProperty Name="Department_ID" ColumnName="Department_ID" />
+                <ScalarProperty Name="Examine_ID" ColumnName="Examine_ID" />
+                <ScalarProperty Name="CheckNumber" ColumnName="CheckNumber" />
+                <ScalarProperty Name="Period" ColumnName="Period" />
+                <ScalarProperty Name="Period_No" ColumnName="Period_No" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MAS_NumberTimes_Queue">
+            <EntityTypeMapping TypeName="MASModel.MAS_NumberTimes_Queue">
+              <MappingFragment StoreEntitySet="MAS_NumberTimes_Queue">
+                <ScalarProperty Name="Department_ID" ColumnName="Department_ID" />
+                <ScalarProperty Name="Examine_ID" ColumnName="Examine_ID" />
+                <ScalarProperty Name="CheckNumber" ColumnName="CheckNumber" />
+                <ScalarProperty Name="Period" ColumnName="Period" />
+                <ScalarProperty Name="Period_No" ColumnName="Period_No" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Queue_ID" ColumnName="Queue_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MAS_NumberTimes_Scheme">
+            <EntityTypeMapping TypeName="MASModel.MAS_NumberTimes_Scheme">
+              <MappingFragment StoreEntitySet="MAS_NumberTimes_Scheme">
+                <ScalarProperty Name="Schemes_ID" ColumnName="Schemes_ID" />
+                <ScalarProperty Name="Department_ID" ColumnName="Department_ID" />
+                <ScalarProperty Name="Eanmine_ID" ColumnName="Eanmine_ID" />
+                <ScalarProperty Name="Am_StartTime" ColumnName="Am_StartTime" />
+                <ScalarProperty Name="Am_EndTime" ColumnName="Am_EndTime" />
+                <ScalarProperty Name="Pm_StartTime" ColumnName="Pm_StartTime" />
+                <ScalarProperty Name="Pm_EndTime" ColumnName="Pm_EndTime" />
+                <ScalarProperty Name="Period" ColumnName="Period" />
+                <ScalarProperty Name="Mins" ColumnName="Mins" />
+                <ScalarProperty Name="OfficeNumber" ColumnName="OfficeNumber" />
+                <ScalarProperty Name="CheckNumber" ColumnName="CheckNumber" />
+                <ScalarProperty Name="EffectiveDate" ColumnName="EffectiveDate" />
+                <ScalarProperty Name="DateType_ID" ColumnName="DateType_ID" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MAS_Patient">
+            <EntityTypeMapping TypeName="MASModel.MAS_Patient">
+              <MappingFragment StoreEntitySet="MAS_Patient">
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="PatientName" ColumnName="PatientName" />
+                <ScalarProperty Name="PatientSex" ColumnName="PatientSex" />
+                <ScalarProperty Name="PatientAddress" ColumnName="PatientAddress" />
+                <ScalarProperty Name="PatientBirthDate" ColumnName="PatientBirthDate" />
+                <ScalarProperty Name="PatientTel" ColumnName="PatientTel" />
+                <ScalarProperty Name="PatientHISID" ColumnName="PatientHISID" />
+                <ScalarProperty Name="PatientIDCard" ColumnName="PatientIDCard" />
+                <ScalarProperty Name="PatientAge" ColumnName="PatientAge" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MAS_Request">
+            <EntityTypeMapping TypeName="MASModel.MAS_Request">
+              <MappingFragment StoreEntitySet="MAS_Request">
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="CheckSite" ColumnName="CheckSite" />
+                <ScalarProperty Name="BodyPartIdentity" ColumnName="BodyPartIdentity" />
+                <ScalarProperty Name="StudyHISID" ColumnName="StudyHISID" />
+                <ScalarProperty Name="StudySource" ColumnName="StudySource" />
+                <ScalarProperty Name="StudyDepartment" ColumnName="StudyDepartment" />
+                <ScalarProperty Name="StudyFee" ColumnName="StudyFee" />
+                <ScalarProperty Name="StudyScore" ColumnName="StudyScore" />
+                <ScalarProperty Name="AppliedDepartment" ColumnName="AppliedDepartment" />
+                <ScalarProperty Name="AppliedDoctor" ColumnName="AppliedDoctor" />
+                <ScalarProperty Name="AppledDatetime" ColumnName="AppledDatetime" />
+                <ScalarProperty Name="ClinicSymptom" ColumnName="ClinicSymptom" />
+                <ScalarProperty Name="ClinicDiagnose" ColumnName="ClinicDiagnose" />
+                <ScalarProperty Name="ExamRequest" ColumnName="ExamRequest" />
+                <ScalarProperty Name="BedNo" ColumnName="BedNo" />
+                <ScalarProperty Name="UniversalServiceID" ColumnName="UniversalServiceID" />
+                <ScalarProperty Name="UniversalServiceText" ColumnName="UniversalServiceText" />
+                <ScalarProperty Name="PatientClass" ColumnName="PatientClass" />
+                <ScalarProperty Name="ApplyBillClass" ColumnName="ApplyBillClass" />
+                <ScalarProperty Name="HISCode" ColumnName="HISCode" />
+                <ScalarProperty Name="RegistDate" ColumnName="RegistDate" />
+                <ScalarProperty Name="RegistOperator" ColumnName="RegistOperator" />
+                <ScalarProperty Name="StudyPatientIn" ColumnName="StudyPatientIn" />
+                <ScalarProperty Name="SickAreaName" ColumnName="SickAreaName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MAS_Reservations">
+            <EntityTypeMapping TypeName="MASModel.MAS_Reservations">
+              <MappingFragment StoreEntitySet="MAS_Reservations">
+                <ScalarProperty Name="ReservationId" ColumnName="ReservationId" />
+                <ScalarProperty Name="ReservationData" ColumnName="ReservationData" />
+                <ScalarProperty Name="StudyKindName" ColumnName="StudyKindName" />
+                <ScalarProperty Name="SystemType" ColumnName="SystemType" />
+                <ScalarProperty Name="ReserveBeginTime" ColumnName="ReserveBeginTime" />
+                <ScalarProperty Name="ReserveEndTime" ColumnName="ReserveEndTime" />
+                <ScalarProperty Name="ReserveState" ColumnName="ReserveState" />
+                <ScalarProperty Name="IsCharged" ColumnName="IsCharged" />
+                <ScalarProperty Name="ReserveOperator" ColumnName="ReserveOperator" />
+                <ScalarProperty Name="ReserveDepartment" ColumnName="ReserveDepartment" />
+                <ScalarProperty Name="SaveTime" ColumnName="SaveTime" />
+                <ScalarProperty Name="StudyDepartmentPlace" ColumnName="StudyDepartmentPlace" />
+                <ScalarProperty Name="ScanType" ColumnName="ScanType" />
+                <ScalarProperty Name="ReserveDepartmentStudySource" ColumnName="ReserveDepartmentStudySource" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MAS_RoleActions">
+            <EntityTypeMapping TypeName="MASModel.MAS_RoleActions">
+              <MappingFragment StoreEntitySet="MAS_RoleActions">
+                <ScalarProperty Name="RoleActionId" ColumnName="RoleActionId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="ActionId" ColumnName="ActionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MAS_Roles">
+            <EntityTypeMapping TypeName="MASModel.MAS_Roles">
+              <MappingFragment StoreEntitySet="MAS_Roles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MAS_UserRoles">
+            <EntityTypeMapping TypeName="MASModel.MAS_UserRoles">
+              <MappingFragment StoreEntitySet="MAS_UserRoles">
+                <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MAS_Users">
+            <EntityTypeMapping TypeName="MASModel.MAS_Users">
+              <MappingFragment StoreEntitySet="MAS_Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="UserPws" ColumnName="UserPws" />
+                <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MAS_CheckQueue">
+            <EntityTypeMapping TypeName="MASModel.MAS_CheckQueue">
+              <MappingFragment StoreEntitySet="MAS_CheckQueue">
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Examine" ColumnName="Examine" />
+                <ScalarProperty Name="Examine_Place" ColumnName="Examine_Place" />
+                <ScalarProperty Name="Examine_Period" ColumnName="Examine_Period" />
+                <ScalarProperty Name="Examine_Date" ColumnName="Examine_Date" />
+                <ScalarProperty Name="Patient_ID" ColumnName="Patient_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
