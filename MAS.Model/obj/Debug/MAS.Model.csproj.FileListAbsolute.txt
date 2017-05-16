@@ -1,0 +1,11 @@
+E:\Users\caty\documents\visual studio 2015\Projects\MAS\MAS.Model\bin\Debug\MAS.Model.dll
+E:\Users\caty\documents\visual studio 2015\Projects\MAS\MAS.Model\bin\Debug\MAS.Model.pdb
+E:\Users\caty\documents\visual studio 2015\Projects\MAS\MAS.Model\bin\Debug\EntityFramework.dll
+E:\Users\caty\documents\visual studio 2015\Projects\MAS\MAS.Model\bin\Debug\EntityFramework.SqlServer.dll
+E:\Users\caty\documents\visual studio 2015\Projects\MAS\MAS.Model\bin\Debug\EntityFramework.xml
+E:\Users\caty\documents\visual studio 2015\Projects\MAS\MAS.Model\bin\Debug\EntityFramework.SqlServer.xml
+E:\Users\caty\documents\visual studio 2015\Projects\MAS\MAS.Model\bin\Debug\zh-Hans\EntityFramework.resources.dll
+E:\Users\caty\documents\visual studio 2015\Projects\MAS\MAS.Model\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
+E:\Users\caty\documents\visual studio 2015\Projects\MAS\MAS.Model\obj\Debug\MAS.Model.csprojResolveAssemblyReference.cache
+E:\Users\caty\documents\visual studio 2015\Projects\MAS\MAS.Model\obj\Debug\MAS.Model.dll
+E:\Users\caty\documents\visual studio 2015\Projects\MAS\MAS.Model\obj\Debug\MAS.Model.pdb

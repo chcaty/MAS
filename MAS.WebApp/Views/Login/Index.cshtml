@@ -1,0 +1,72 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>登录 | 酒店订餐管理系统</title>
+  <meta name="description" content="登录页面">
+  <meta name="keywords" content="login">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="icon" type="image/png" href="~/Content/Images/favicon.png">
+  <link rel="apple-touch-icon-precomposed" href="~/Content/Images/app-icon72x72@2x.png">
+  <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+  <link rel="stylesheet" href="~/Content/Css/amazeui.min.css" />
+  <link rel="stylesheet" href="~/Content/Css/admin.css">
+  <link rel="stylesheet" href="~/Content/Css/app.css">
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+</head>
+
+<body data-type="login">
+  <div class="am-g myapp-login">
+	<div class="myapp-login-logo-block  tpl-login-max">
+		<div class="myapp-login-logo-text">
+			<div class="myapp-login-logo-text">
+				后台管理<span> 登录</span> <i class="am-icon-skyatlas"></i>
+				
+			</div>
+		</div>
+
+		<div class="login-font">
+			<i>登录 </i> 或 <span> 注册</span>
+		</div>
+@using (Ajax.BeginForm("AdminLogin", "Login", new { }, new AjaxOptions() { HttpMethod = "POST", OnSuccess = "AfterLogin", LoadingElementId = "div1" }, new { id = "loginForm" }))
+{
+		<div class="am-u-sm-10 login-am-center">
+			<form class="am-form">
+				<fieldset>
+					<div class="am-form-group">
+						<input type="text" class="" id="LoginCode" name="LoginCode" placeholder="输入用户名">
+					</div>
+					<div class="am-form-group">
+						<input type="password" class="" id="LoginPwd" name="LoginPwd" placeholder="输入密码">
+					</div>
+					<p><button type="submit" class="am-btn am-btn-default">登录</button></p>
+				</fieldset>
+			</form>
+            <div id="div1" style="display:none">正在登录ing,请稍候...</div>
+		</div>
+}
+	</div>
+</div>
+</body>
+
+</html>
+
+<script>
+    function AfterLogin(data) {
+        if (data == "ok") {
+            window.location.href="/Home/Index"
+        } else {
+            alert("登录失败!!!");
+        }
+    }
+</script>

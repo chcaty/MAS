@@ -1,0 +1,5 @@
+E:\Users\caty\documents\visual studio 2015\Projects\MAS\MAS.Common\bin\Debug\MAS.Common.dll
+E:\Users\caty\documents\visual studio 2015\Projects\MAS\MAS.Common\bin\Debug\MAS.Common.pdb
+E:\Users\caty\documents\visual studio 2015\Projects\MAS\MAS.Common\obj\Debug\MAS.Common.csprojResolveAssemblyReference.cache
+E:\Users\caty\documents\visual studio 2015\Projects\MAS\MAS.Common\obj\Debug\MAS.Common.dll
+E:\Users\caty\documents\visual studio 2015\Projects\MAS\MAS.Common\obj\Debug\MAS.Common.pdb

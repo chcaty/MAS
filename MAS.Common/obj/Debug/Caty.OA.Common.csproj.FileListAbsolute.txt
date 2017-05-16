@@ -1,0 +1,4 @@
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.Common\bin\Debug\Caty.OA.Common.dll
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.Common\bin\Debug\Caty.OA.Common.pdb
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.Common\obj\Debug\Caty.OA.Common.dll
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.Common\obj\Debug\Caty.OA.Common.pdb

@@ -1,0 +1,281 @@
+﻿
+@{
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        loaddata(1, 15);
+    }
+
+    function loaddata(pageNumber, pageSize) {
+        $.ajax({
+            url: '/CategoryInfo/GetCategoryInfoList',
+            type: 'post',
+            data: "pageIndex="+pageNumber+"&pageSize="+pageSize,
+            //data:{page:pageNumber,rows:pageSize},
+            dataType: 'Text',
+            success: function (Json) {
+                var jsonObj = JSON.parse(Json);
+                var totalPage = jsonObj.total / pageSize;
+
+                /*清空内容*/
+                $("#contentlist").text("");
+                $('ul.am-pagination').text("");
+
+                /*插入数据*/
+                var number = jsonObj.rows.length;
+                for (var i = 0; i < number; i++) {
+                    $("#contentlist").append("<tr><td><input type=\"checkbox\" name=\"choose\" value=\""+jsonObj.rows[i].ID+"\"/></td><td><a href=\"\">"
+                        + jsonObj.rows[i].Name + "</a></td><td>" + jsonObj.rows[i].PName
+                        + "</td><td class=\"am-hide-sm-only\">" + jsonObj.rows[i].Sort
+                        + "</td><td class=\"am-hide-sm-only\">" + jsonObj.rows[i].Time
+                        + "</td><td><div class=\"am-btn-toolbar\"><div class=\"am-btn-group am-btn-group-xs\">"
+                        + "<button type=\"button\" class=\"am-btn am-btn-default am-btn-xs am-text-secondary\" onclick = \"showEditCategory("+jsonObj.rows[i].ID+")\"><span class=\"am-icon-pencil-square-o\"></span> 编辑</button>"
+                        + "<button class=\"am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only\"><span class=\"am-icon-trash-o\"></span> 删除</button>"
+                        + "</div></div></td></tr>")
+                }
+
+                /*页数*/
+                if (String(pageNumber) == "1") {
+                    $('div.am-cf:last').text("");
+                    $('div.am-cf:last').append("共" + jsonObj.total + " 条记录");
+                    $('div.am-cf:last').append("<div class=\"am-fr\"><ul class=\"am-pagination\"></ul></div>")
+                    $('ul.am-pagination').append("<li class=\"am-disabled\" id=\"before\"><a>«</a></li>")
+                } else {
+                    $('ul.am-pagination').append("<li onclick=loaddata(" + (pageNumber - 1) + ",15)><a>«</a></li>")
+                }
+                for (var i = 0; i < totalPage; i++) {
+                    if (String(pageNumber) == String(i + 1)) {
+                        $('ul.am-pagination').append("<li class=\"am-active\"><a>" + (i + 1) + "</a></li>");
+                    } else {
+                        $('ul.am-pagination').append("<li onclick=loaddata(" + (i + 1) + ",15)><a>" + (i + 1) + "</a></li>");
+                    }
+                }
+                if (String(jsonObj.total) < String(pageNumber + 1)) {
+                    $('ul.am-pagination').append("<li class=\"am-disabled\"><a>»</a></li>")
+                } else {
+                    $('ul.am-pagination').append("<li onclick=loaddata(" + (pageNumber + 1) + ",15)><a>»</a></li>")
+                }
+            }
+        });
+    }
+
+    function deleteInfo() {
+        var rowsLength = $("input[name='choose']:checked").length;
+        if (!rowsLength || rowsLength == 0) {
+            alert("请选择要删除的分类!");
+            return;
+        }
+        //alert(rowsLength);
+        //var rows = $("input[name='choose']:checked").val();
+        //alert(rows);
+        if (confirm("确定要删除数据吗?")) {
+            var strId = "";
+            $('input[name="choose"]:checked').each(function () {
+                strId = strId + $(this).val() + ",";
+            });
+            strId = strId.substr(0, strId.length - 1);
+            $.post("/CategoryInfo/DeleteCategoryInfo", {"strId":strId},function(data){
+                if (data == "ok") {
+                    var i = $('li.am-active').text();
+                    loaddata(i, 15);
+                } else {
+                    alert("删除失败!!!")
+                }
+            });
+        }
+    }
+
+    function showInsertCategoryInfo() {
+        var $modal = $('#InsertCategoryInfo');
+        $modal.modal();
+    }
+
+    function closeInsertCategoryInfo() {
+        var $modal = $('#InsertCategoryInfo');
+        $modal.modal('close');
+    }
+
+    function afterAdd(data) {
+        if (data == "ok") {
+            var $modal = $('#InsertCategoryInfo');
+            $modal.modal('close');
+            var i = $('li.am-active').text();
+            loaddata(i, 15);
+        }
+    }
+
+    function showEditCategory(id) {
+        $.post("/CategoryInfo/ShowEditInfo", { "id": id }, function (data) {
+            $("#txtparent_id").val(data.PID);
+            $("#txtsuppl_time").val(data.Time);
+            $("#txtsort_order").val(data.Sort_Order);
+            $("#txtcategory_id").val(data.ID);
+            $("#txtcategory_name").val(data.Name);
+            var status = data.Status;
+            $(":radio[name='status'][value='" + status + "']").prop("checked", "checked");
+            var main = data.Top;
+            $(":radio[name='main'][value='" + main + "']").prop("checked", "checked");
+        });
+        var $modal = $('#EditCategory');
+        $modal.modal();
+    }
+
+    function afterEdit(data) {
+        if (data == "ok") {
+            var $modal = $('#EditCategory');
+            $modal.modal('close');
+            var i = $('li.am-active').text();
+            loaddata(i, 15);
+        } else {
+            alert("更新失败!!!");
+        }
+    }
+
+    function closeEditCategory() {
+        var $modal = $('#EditCategory');
+        $modal.modal('close');
+    }
+</script>
+
+<!-- content start -->
+<div class="admin-content">
+    <div class="am-cf am-padding">
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">分类管理</strong> / <small>category</small></div>
+    </div>
+    <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-6">
+            <div class="am-btn-toolbar">
+                <div class="am-btn-group am-btn-group-xs">
+                    <button type="button" class="am-btn am-btn-primary" onclick="showInsertCategoryInfo()" ><span class="am-icon-plus"></span> 新增</button>
+                    <button type="button" class="am-btn am-btn-default" onclick="deleteInfo()"><span class="am-icon-trash-o"></span> 删除</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="am-g">
+        <div class="am-u-sm-12">
+            <form class="am-form">
+                <table class="am-table am-table-striped am-table-hover table-main">
+                    <thead >
+                        <tr>
+                            <th class="table-check"><input type="checkbox" /></th>
+                            <th class="table-title">分类名</th>
+                            <th class="table-type">上一级分类</th>
+                            <th class="table-author am-hide-sm-only">排序</th>
+                            <th class="table-date am-hide-sm-only">供应时间</th>
+                            <th class="table-set">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="contentlist">
+                    </tbody>
+                </table>
+                <div class="am-cf">
+                    <div class="am-fr">
+                        <ul class="am-pagination">
+                        </ul>
+                    </div>
+                </div>
+                <hr />
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--添加数据-->
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="InsertCategoryInfo">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">
+            添加分类
+            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+        </div>
+        <div class="am-modal-bd">
+        @using (Ajax.BeginForm("AddCategoryInfo", "CategoryInfo", new { }, new AjaxOptions() { HttpMethod = "post", OnSuccess = "afterAdd" }, new { id = "addForm" }))
+        {
+            <table class="am-table am-table-bordered am-table-striped am-table-compact">
+
+                <tr><td>分类名</td><td><input type="text" class="am-fl" name="category_name" placeholder="分类名"></td></tr>
+                <tr><td>上一级分类</td><td><input type="text" class="am-fl" name="parent_id" placeholder="上一级分类"></td></tr>
+                <tr><td>供应时间</td><td><input type="text" class="am-fl" name="supply_time" placeholder="供应时间"></td></tr>
+                <tr><td>排序</td><td><input type="number" class="am-fl" name="sort_order" placeholder="排序"></td></tr>
+                <tr><td>是否启用</td><td>
+                    <label class="am-radio-inline">
+                    <input type="radio" value="1" name="status"> 启用
+                    </label>
+                    <label class="am-radio-inline">
+                    <input type="radio" value="0" name="status"> 不启用
+                    </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>是否为顶级菜单</td>
+                    <td>
+                        <label class="am-radio-inline">
+                            <input type="radio" value="1" name="main"> 是
+                        </label>
+                        <label class="am-radio-inline">
+                            <input type="radio" value="0" name="main"> 否
+                        </label>
+                    </td>
+                </tr>
+            </table>
+            <button type="submit" class="am-btn am-btn-default">提交</button>
+            <button type="button" class="am-btn am-btn-default" onclick="closeInsertCategoryInfo()">取消</button>
+        }
+        </div>
+    </div>
+</div>
+
+<!--编辑数据-->
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="EditCategory">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">
+            编辑分类
+            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+        </div>
+        <div class="am-modal-bd">
+            @using (Ajax.BeginForm("EditCategoryInfo", "CategoryInfo", new { }, new AjaxOptions() { HttpMethod = "post", OnSuccess = "afterEdit" }, new { id = "editForm" }))
+            {
+                <input type="hidden" name="category_id" id="txtcategory_id" />
+                <table class="am-table am-table-bordered am-table-striped am-table-compact">
+                    <tr><td>分类名</td><td><input type="text" class="am-fl" id="txtcategory_name" name="category_name" placeholder="分类名"></td></tr>
+                    <tr><td>上一级分类</td><td><input type="text" class="am-fl" id="txtparent_id" name="parent_id" placeholder="上一级分类"></td></tr>
+                    <tr><td>供应时间</td><td><input type="text" class="am-fl" id="txtsuppl_time" name="supply_time" placeholder="供应时间"></td></tr>
+                    <tr><td>排序</td><td><input type="number" class="am-fl" id="txtsort_order" name="sort_order" placeholder="排序"></td></tr>
+                    <tr>
+                        <td>是否启用</td>
+                        <td>
+                            <label class="am-radio-inline">
+                                <input type="radio" class="am-fl" value="1" name="status"> 启用
+                            </label>
+                            <label class="am-radio-inline">
+                                <input type="radio" class="am-fl" value="0" name="status"> 不启用
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>是否为顶级菜单</td>
+                        <td>
+                            <label class="am-radio-inline">
+                                <input type="radio" class="am-fl" value="1" name="main"> 是
+                            </label>
+                            <label class="am-radio-inline">
+                                <input type="radio" class="am-fl" value="0" name="main"> 否
+                            </label>
+                        </td>
+                    </tr>
+                </table>
+                <button type="submit" class="am-btn am-btn-default">提交</button>
+                <button type="button" class="am-btn am-btn-default" onclick="closeEditCategory()">取消</button>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- content end -->
+
+
+   

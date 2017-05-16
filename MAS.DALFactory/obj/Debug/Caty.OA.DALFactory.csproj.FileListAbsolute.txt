@@ -1,0 +1,15 @@
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.DALFactory\bin\Debug\Caty.OA.DALFactory.dll
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.DALFactory\bin\Debug\Caty.OA.DALFactory.pdb
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.DALFactory\bin\Debug\Caty.OA.DAL.dll
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.DALFactory\bin\Debug\Caty.OA.IDAL.dll
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.DALFactory\bin\Debug\Caty.OA.Model.dll
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.DALFactory\bin\Debug\EntityFramework.dll
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.DALFactory\bin\Debug\Caty.OA.DAL.pdb
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.DALFactory\bin\Debug\Caty.OA.IDAL.pdb
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.DALFactory\bin\Debug\Caty.OA.Model.pdb
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.DALFactory\bin\Debug\EntityFramework.xml
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.DALFactory\bin\Debug\zh-Hans\EntityFramework.resources.dll
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.DALFactory\obj\Debug\Caty.OA.DALFactory.csprojResolveAssemblyReference.cache
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.DALFactory\obj\Debug\Caty.OA.DALFactory.dll
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.DALFactory\obj\Debug\Caty.OA.DALFactory.pdb
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.DALFactory\bin\Debug\Caty.OA.DALFactory.dll.config

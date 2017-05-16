@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects>
+  <object type="MAS.BLL.CategoryInfoService,MAS.BLL" singleton="false" name="CategoryInfoService">
+  </object>
+  <object type="MAS.BLL.UserInfoService,MAS.BLL" singleton="false" name="UserInfoSerivce"></object>
+</objects>

@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Category_Language">
+    <Key>
+      <PropertyRef Name="category_id" />
+      <PropertyRef Name="language_id" />
+    </Key>
+    <Property Name="category_id" Type="int" Nullable="false" />
+    <Property Name="language_id" Type="smallint" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CategoryInfo">
+    <Key>
+      <PropertyRef Name="category_id" />
+    </Key>
+    <Property Name="category_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="parent_id" Type="int" Nullable="false" />
+    <Property Name="sort_order" Type="int" Nullable="false" />
+    <Property Name="main" Type="smallint" Nullable="false" />
+    <Property Name="status" Type="smallint" Nullable="false" />
+    <Property Name="supply_time" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <!--生成过程中发现错误:
+警告 6002: 表/视图“Hotel.dbo.UserInfo”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="user_id" />
+      <PropertyRef Name="user_name" />
+      <PropertyRef Name="user_pwd" />
+      <PropertyRef Name="user_email" />
+    </Key>
+    <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="user_pwd" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="user_email" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Category_Language">
+    <End Role="CategoryInfo" Type="Self.CategoryInfo" Multiplicity="1" />
+    <End Role="Category_Language" Type="Self.Category_Language" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CategoryInfo">
+        <PropertyRef Name="category_id" />
+      </Principal>
+      <Dependent Role="Category_Language">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="HotelModelStoreContainer">
+    <EntitySet Name="Category_Language" EntityType="Self.Category_Language" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CategoryInfo" EntityType="Self.CategoryInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserInfo" EntityType="Self.UserInfo" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [UserInfo].[user_id] AS [user_id], 
+    [UserInfo].[user_name] AS [user_name], 
+    [UserInfo].[user_pwd] AS [user_pwd], 
+    [UserInfo].[user_email] AS [user_email]
+    FROM [dbo].[UserInfo] AS [UserInfo]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Category_Language" Association="Self.FK_Category_Language">
+      <End Role="CategoryInfo" EntitySet="CategoryInfo" />
+      <End Role="Category_Language" EntitySet="Category_Language" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

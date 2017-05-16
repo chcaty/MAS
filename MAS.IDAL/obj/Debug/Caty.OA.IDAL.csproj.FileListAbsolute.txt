@@ -1,0 +1,10 @@
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.IDAL\bin\Debug\Caty.OA.IDAL.dll
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.IDAL\bin\Debug\Caty.OA.IDAL.pdb
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.IDAL\bin\Debug\Caty.OA.Model.dll
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.IDAL\bin\Debug\EntityFramework.dll
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.IDAL\bin\Debug\Caty.OA.Model.pdb
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.IDAL\bin\Debug\EntityFramework.xml
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.IDAL\bin\Debug\zh-Hans\EntityFramework.resources.dll
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.IDAL\obj\Debug\Caty.OA.IDAL.csprojResolveAssemblyReference.cache
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.IDAL\obj\Debug\Caty.OA.IDAL.dll
+E:\users\caty\documents\visual studio 2015\Projects\Caty.OA\Caty.OA.IDAL\obj\Debug\Caty.OA.IDAL.pdb
