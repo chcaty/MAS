@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<objects>
-  <object type="Caty.OA.BLL.CategoryInfoService,Caty.OA.BLL" singleton="false" name="CategoryInfoService">
-  </object>
-  <object type="Caty.OA.BLL.UserInfoService,Caty.OA.BLL" singleton="false" name="UserInfoSerivce"></object>
-</objects>
